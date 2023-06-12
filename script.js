@@ -23,7 +23,7 @@ function ageCalc(year){
 const age = ageCalc(1997);
 
 if(age < 20){
-    console.log("You're yong");
+    console.log("You're young");
 }
 
 else if(age < 30){
