@@ -34,6 +34,16 @@ const initialFacts = [
     text: "Ali Al Yafei",
   },
 ];
+const CATEGORIES = [
+  { name: "technology", color: "#3b82f6" },
+  { name: "science", color: "#16a34a" },
+  { name: "finance", color: "#ef4444" },
+  { name: "society", color: "#eab308" },
+  { name: "entertainment", color: "#db2777" },
+  { name: "health", color: "#14b8a6" },
+  { name: "history", color: "#f97316" },
+  { name: "news", color: "#8b5cf6" },
+];
 
 // Select DOM elements
 const btn = document.querySelector(".btn-open");
@@ -47,14 +57,16 @@ factsList.innerHTML = "";
 // Fetch table from Supabase
 loadFacts();
 async function loadFacts() {
-  const res = await fetch("https://xxxx.supabase.co/rest/v1/facts", {
+  const res = await fetch("https://qsfmpuhys.supabase.co/rest/v1/facts", {
     headers: {
-      apikey: "xxxxxueXNkdWttQMc",
-      authorization: "Bearer exxxx24iLxxcxMn0.xxxlI5UuelQMc",
+      apikey: "sfsdf",
+      authorization: "Bearer dfghdskfsf",
     },
   });
   const data = await res.json();
   console.log(data);
+  // const filtered = data.filter((fact) => fact.category === "history"); // Only facts of category history
+
   createFactsList(data);
 }
 
@@ -71,7 +83,9 @@ function createFactsList(dataArray) {
           >(Source)</a
         >
       </p>
-      <span class="tag" style="background-color: #3b82f6"
+      <span class="tag" style="background-color: ${
+        CATEGORIES.find((cat) => cat.name == fact.category).color
+      }"
         >${fact.category}</span
       >
       </li>
@@ -176,4 +190,8 @@ btn.addEventListener("click", function () {
   const stringOnly = CATEGORIES.map((i) => i.name); // retunr names only
   console.log(stringOnly);
   
+
+  // Filter and Find methods
+  [7,4,3,12,32,34,1].filter((i) => i > 10); // returns array of values
+  [7,4,3,12,32,34,1].find((i) => i > 10); // returns first value
   */
