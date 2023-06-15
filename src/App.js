@@ -1,3 +1,5 @@
+import React from "react";
+import { useState } from "react";
 import "./style.css";
 
 const CATEGORIES = [
@@ -24,7 +26,8 @@ const initialFacts = [
   },
   {
     id: 2,
-    text: "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
+    text:
+      "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
     source:
       "https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids",
     category: "history",
@@ -45,6 +48,18 @@ const initialFacts = [
   },
 ];
 
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <span style={{ fontSize: "45px" }}>{count}</span>
+      <button className="btn btn-large" onClick={() => setCount((c) => c + 1)}>
+        +1
+      </button>
+    </div>
+  );
+}
+
 function App() {
   const appTitle = "Today I Learned";
   return (
@@ -62,7 +77,7 @@ function App() {
         </div>
         <button className="btn btn-large btn-open">Share a fact</button>
       </header>
-
+      <Counter />
       <NewFactForm />
 
       <main className="main">
