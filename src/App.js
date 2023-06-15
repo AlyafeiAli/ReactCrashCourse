@@ -84,37 +84,43 @@ function CategoryFilter() {
 function FactList() {
   // TEMPORARY
   const facts = initialFacts;
-  const category = CATEGORIES;
   return (
     <section>
       <ul className="facts-list">
         {facts.map((fact) => (
-          <li key={fact.id} className="fact">
-            <p>
-              {fact.text}
-              <a className="source" href={fact.source} target="_blank">
-                (Source)
-              </a>
-            </p>
-            <span
-              className="tag"
-              style={{
-                backgroundColor: category.find(
-                  (cat) => cat.name == fact.category
-                ).color,
-              }}
-            >
-              {fact.category}
-            </span>
-            <div className="vote-buttons">
-              <button>👍 {fact.votesInteresting}</button>
-              <button>🤯 {fact.votesMindblowing}</button>
-              <button>⛔️ {fact.votesFalse}</button>
-            </div>
-          </li>
+          <Fact key={fact.id} factObj={fact} />
         ))}
       </ul>
+      <p>There are {facts.length} facts in the database. Add your own!</p>
     </section>
+  );
+}
+
+function Fact({ factObj }) {
+  return (
+    <li className="fact">
+      <p>
+        {factObj.text}
+        <a className="source" href={factObj.source} target="_blank">
+          (Source)
+        </a>
+      </p>
+      <span
+        className="tag"
+        style={{
+          backgroundColor: CATEGORIES.find(
+            (cat) => cat.name == factObj.category
+          ).color,
+        }}
+      >
+        {factObj.category}
+      </span>
+      <div className="vote-buttons">
+        <button>👍 {factObj.votesInteresting}</button>
+        <button>🤯 {factObj.votesMindblowing}</button>
+        <button>⛔️ {factObj.votesFalse}</button>
+      </div>
+    </li>
   );
 }
 
