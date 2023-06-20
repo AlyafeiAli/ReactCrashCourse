@@ -26,8 +26,7 @@ const initialFacts = [
   },
   {
     id: 2,
-    text:
-      "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
+    text: "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
     source:
       "https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids",
     category: "history",
@@ -48,19 +47,21 @@ const initialFacts = [
   },
 ];
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <span style={{ fontSize: "45px" }}>{count}</span>
-      <button className="btn btn-large" onClick={() => setCount((c) => c + 1)}>
-        +1
-      </button>
-    </div>
-  );
-}
+// function Counter() { STATE
+//   const [count, setCount] = useState(0);
+//   return (
+//     <div>
+//       <span style={{ fontSize: "45px" }}>{count}</span>
+//       <button className="btn btn-large" onClick={() => setCount((c) => c + 1)}>
+//         +1
+//       </button>
+//     </div>
+//   );
+// }
 
 function App() {
+  // set State variable
+  const [showForm, setShowForm] = useState(false);
   const appTitle = "Today I Learned";
   return (
     <>
@@ -75,10 +76,16 @@ function App() {
           />
           <h1>{appTitle}</h1>
         </div>
-        <button className="btn btn-large btn-open">Share a fact</button>
+        <button
+          className="btn btn-large btn-open"
+          onClick={() => setShowForm((show) => (show = !show))}
+        >
+          Share a fact
+        </button>
       </header>
-      <Counter />
-      <NewFactForm />
+      {/* <Counter /> */}
+
+      {showForm ? <NewFactForm /> : null}
 
       <main className="main">
         <CategoryFilter />
