@@ -14,6 +14,14 @@ body {
 .hidden {
   display: none !important;
 }
+
+.message {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 24px;
+}
 /* MAIN LAYOUT */
 .container {
   max-width: 1500px;

@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import supabase from "./supabase";
 import "./style.css";
 
 const CATEGORIES = [
@@ -74,7 +75,23 @@ function isValidHttpUrl(string) {
 function App() {
   // set State variable
   const [showForm, setShowForm] = useState(false);
-  const [facts, setFacts] = useState(initialFacts);
+  const [facts, setFacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(function () {
+    async function getFacts() {
+      setIsLoading(true);
+      const { data: facts, error } = await supabase
+        .from("facts")
+        .select("*")
+        .order("text", { ascending: true });
+      console.log(facts);
+      facts ? setFacts(facts) : setFacts([]);
+      setIsLoading(false);
+    }
+    getFacts();
+  }, []);
+
   return (
     <>
       <Header showForm={showForm} setShowForm={setShowForm} />
@@ -83,10 +100,14 @@ function App() {
       ) : null}
       <main className="main">
         <CategoryFilter />
-        <FactList facts={facts} />
+        {isLoading ? <Loader /> : <FactList facts={facts} />}
       </main>
     </>
   );
+}
+
+function Loader() {
+  return <p className="message">Loading...</p>;
 }
 
 function Header({ showForm, setShowForm }) {
